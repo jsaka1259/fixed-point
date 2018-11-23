@@ -9,27 +9,7 @@ float_to_fr32(float real, uint8_t sft)
 float
 fr32_to_float(int32_t fr32, uint8_t sft)
 {
-  int8_t lc;
-  int8_t sign = 1;
-  uint8_t nume;
-  uint32_t deno;
-  float inte = 0;
-  float frac = 0;
-  if (0x80000000 == fr32)
-		sign *= -1;
-	if (fr32 >> FMSB) {
-    fr32 = -fr32;
-    sign *= -1;
-  }
-  if (31 != sft)
-    inte = sign * (float)(fr32 >> sft);
-  for (lc = sft - 1; lc >= 0; lc--) {
-    nume = ((1U << lc) & fr32) >> lc;
-    deno = 1U << (sft - lc);
-    frac += (float)nume / deno;
-  }
-	frac *= sign;
-	return inte + frac;
+	return ((float)fr32 * 1.0F / (1U << sft));
 }
 
 int32_t
