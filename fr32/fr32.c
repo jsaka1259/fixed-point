@@ -1,36 +1,36 @@
 #include <common.h>
 
-int32_t
+	int32_t
 float_to_fr32(float real, uint8_t sft)
 {
-  return ((int32_t)((1U << sft) * (real)));
+	return ((int32_t)((1U << sft) * (real)));
 }
 
-float
+	float
 fr32_to_float(int32_t fr32, uint8_t sft)
 {
 	return ((float)fr32 * 1.0F / (1U << sft));
 }
 
-int32_t
+	int32_t
 mul_fr32(int32_t a, int32_t b, uint8_t sft)
 {
-  return (int32_t)(((int64_t)a * (int64_t)b) >> sft);
+	return (int32_t)(((int64_t)a * (int64_t)b) >> sft);
 }
 
-int32_t
+	int32_t
 div_fr32(int32_t a, int32_t b, uint8_t sft)
 {
-  return (int32_t)(((int64_t)a << sft) / b);
+	return (int32_t)(((int64_t)a << sft) / b);
 }
 
-int32_t
+	int32_t
 float_to_fr32_pih(uint8_t sft)
 {
 	return float_to_fr32(M_PIH, sft);
 }
 
-static int32_t
+	static int32_t
 cos_fr32_q30(int32_t x)
 {
 	static const uint8_t sft = 30;
@@ -52,7 +52,7 @@ cos_fr32_q30(int32_t x)
 	return y;
 }
 
-int32_t
+	int32_t
 cos_fr32(int32_t x, uint8_t sft)
 {
 	uint8_t lsft;
@@ -74,7 +74,7 @@ cos_fr32(int32_t x, uint8_t sft)
 	return sign * cos_fr32_q30(x) >> lsft;
 }
 
-int32_t
+	int32_t
 sin_fr32(int32_t x, uint8_t sft)
 {
 	return cos_fr32(x - float_to_fr32_pih(sft), sft); 
