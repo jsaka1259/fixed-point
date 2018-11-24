@@ -34,11 +34,13 @@ static int32_t
 cos_fr32_q30(int32_t x)
 {
 	static const uint8_t sft = 30;
-	static const int32_t a[4] = {
+	static const int32_t a[6] = {
 		0x20000000,
 		0x05555558,
 		0x02222224,
 		0x0124924A,
+		0x00B60B61,
+		0x007C1F08,
 	};
 	uint8_t i;
 	int32_t xxh, tmp, y;
