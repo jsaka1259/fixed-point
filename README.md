@@ -14,10 +14,13 @@
 |Name|Content|
 |:--|:--|
 |float_to_fr32(float real, uint8_t sft)|Convert float to fixed-point|
+|float_to_fr32_pih(uint8_t sft)|Convert (float)M_PI/2 to fixed-point|
+|double_to_fr32(double real, uint8_t sft)|Convert double to fixed-point|
+|double_to_fr32_pih(uint8_t sft)|Convert (double)M_PI/2 to fixed-point|
 |fr32_to_float(int32_t fr32, uint8_t sft)|Convert fixed-point to float|
+|fr32_to_double(int32_t fr32, uint8_t sft)|Convert fixed-point to double|
 |mul_fr32(int32_t a, int32_t b, uint8_t sft)|Multiplication of fixed-point|
 |div_fr32(int32_t a, int32_t b, uint8_t sft)|Division of fixed-point|
-|float_to_fr32_pih(uint8_t sft)|Convert M_PI to fixed-point|
 |cos_fr32(int32_t x, uint8_t sft)|Fixed-point cosine function|
 |sin_fr32(int32_t x, uint8_t sft)|Fixed-point sine function|
 
