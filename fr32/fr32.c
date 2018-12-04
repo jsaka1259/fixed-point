@@ -6,10 +6,34 @@ float_to_fr32(float real, uint8_t sft)
 	return ((int32_t)((1U << sft) * (real)));
 }
 
+int32_t
+float_to_fr32_pih(uint8_t sft)
+{
+	return float_to_fr32((float)M_PIH, sft);
+}
+
+int32_t
+double_to_fr32(double real, uint8_t sft)
+{
+	return ((int32_t)((1U << sft) * (real)));
+}
+
+int32_t
+double_to_fr32_pih(uint8_t sft)
+{
+	return double_to_fr32(M_PIH, sft);
+}
+
 float
 fr32_to_float(int32_t fr32, uint8_t sft)
 {
 	return ((float)fr32 * 1.0F / (1U << sft));
+}
+
+double
+fr32_to_double(int32_t fr32, uint8_t sft)
+{
+	return ((double)fr32 * 1.0F / (1U << sft));
 }
 
 int32_t
@@ -22,12 +46,6 @@ int32_t
 div_fr32(int32_t a, int32_t b, uint8_t sft)
 {
 	return (int32_t)(((int64_t)a << sft) / b);
-}
-
-int32_t
-float_to_fr32_pih(uint8_t sft)
-{
-	return float_to_fr32(M_PIH, sft);
 }
 
 static int32_t
@@ -62,7 +80,7 @@ cos_fr32(int32_t x, uint8_t sft)
 	int8_t sign = 1;
 	if (29 <= sft)
 		return 0;
-	lpih = float_to_fr32_pih(sft);
+	lpih = double_to_fr32_pih(sft);
 	lsft = 30 - sft;
 	if (x & 0x80000000)
 		x = -x;
