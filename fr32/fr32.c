@@ -63,7 +63,7 @@ cos_fr32_q30(int32_t x)
 	uint8_t i;
 	int32_t xxh, tmp, y;
 	xxh = mul_fr32(x, x >> 1U, sft);
-	tmp = float_to_fr32(1.0F, sft);
+	tmp = double_to_fr32(1.0F, sft);
 	y = tmp;
 	for (i = 1; i <= sizeof(a) / sizeof(a[0]); i++) {
 		tmp = mul_fr32(mul_fr32(-tmp, xxh, sft), a[i-1], sft) << 1U;
