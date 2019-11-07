@@ -1,6 +1,8 @@
 #ifndef _FR32_H_
 #define _FR32_H_
 
+#include <stdint.h>
+
 #define FMSB 31
 #define SFT_LIMIT(sft) (((uint8_t)(sft) > (FMSB)) ? (FMSB) : (uint8_t)(sft))
 

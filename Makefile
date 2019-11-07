@@ -1,22 +1,26 @@
-TARGET := fixed-point
+SRCDIR  := src
+FR32DIR := $(SRCDIR)/fr32
 
-SFR32  := fr32/
-
-OBJS   := main.o $(SFR32)fr32.o
+OUTDIR  := build
+SRCS    := $(wildcard $(SRCDIR)/*.c)
+SRCS    += $(wildcard $(FR32DIR)/*.c)
+OBJS    := $(addprefix $(OUTDIR)/,$(patsubst %.c,%.o,$(SRCS)))
+BIN     := $(OUTDIR)/fr32
 
 CC     := gcc
 CFLAGS := -Wall
-INC    := -I $(SFR32)
 RM     := rm
 
-.SUFFIXES: .c .o
+.PHONY: clean rebuild
 
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) $(INC) -o $@ $^
+$(BIN): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
 
-.c.o:
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+$(OUTDIR)/%.o:%.c
+	@if [ ! -e `dirname $@` ]; then mkdir -p `dirname $@`; fi
+	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: clean
 clean:
-	$(RM) -f $(OBJS) $(TARGET)
+	$(RM) -rf $(OUTDIR)
+
+rebuild: clean $(BIN)
